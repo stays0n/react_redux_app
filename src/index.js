@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
-import * as actions from './store/actions';
-import { initiateStore } from './store/store';
+import * as actions from './store/task/actions';
+import configureStore from './store/store';
 
-const store = initiateStore();
+const store = configureStore();
 
 const App = () => {
     const [state, setState] = useState(store.getState());

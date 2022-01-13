@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-
+// functions - action creators:
 export function taskCompleted(id) {
     return {
         type: actionTypes.taskUpdated,
