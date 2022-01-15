@@ -31,10 +31,11 @@ const taskSlice = createSlice({
 const { actions, reducer: taskReducer } = taskSlice;
 const { update, remove } = actions;
 
+export const completeTask = (id) => (getState, dispatch) => {
+    dispatch(update({ id, completed: true }));
+};
+
 // functions - action creators:
-export function taskCompleted(id) {
-    return update({ id, completed: true });
-}
 export function titleChanged(id) {
     return update({ id, title: `New title for ${id}` });
 }

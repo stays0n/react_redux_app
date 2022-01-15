@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
-import { taskCompleted, titleChanged, taskDeleted } from './store/task';
+import { titleChanged, taskDeleted, completeTask } from './store/task';
 import configureStore from './store/store';
 
 const store = configureStore();
@@ -12,10 +12,6 @@ const App = () => {
     useEffect(() => {
         store.subscribe(() => setState(store.getState()));
     }, []);
-
-    const completeTask = (taskId) => {
-        store.dispatch(taskCompleted(taskId));
-    };
 
     const changeTitle = (taskId) => {
         store.dispatch(titleChanged(taskId));
@@ -35,7 +31,8 @@ const App = () => {
                         <p>{el.description}</p>
                         <p>{el.title}</p>
                         <p>{`Complited: ${el.completed}`}</p>
-                        <button onClick={() => completeTask(el.id)}>
+                        <button
+                            onClick={() => store.dispatch(completeTask(el.id))}>
                             Complete
                         </button>
                         <button onClick={() => changeTitle(el.id)}>
