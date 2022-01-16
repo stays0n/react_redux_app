@@ -14,7 +14,9 @@ import { useSelector, useDispatch } from 'react-redux';
 const store = configureStore();
 
 const App = () => {
-    const state = useSelector((state) => state);
+    const state = useSelector((state) => state.entities);
+    const isLoading = useSelector((state) => state.isLoading);
+    const error = useSelector((state) => state.error);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -28,6 +30,13 @@ const App = () => {
     const deleteTask = (taskId) => {
         dispatch(taskDeleted(taskId));
     };
+
+    if (isLoading) {
+        return <h1>Loading</h1>;
+    }
+    if (error) {
+        return <p>{error}</p>;
+    }
 
     return (
         <React.Fragment>
