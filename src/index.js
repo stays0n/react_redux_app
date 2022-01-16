@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
 import {
     titleChanged,
@@ -9,15 +8,16 @@ import {
     getTasks,
 } from './store/task';
 import configureStore from './store/store';
+import { Provider } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const store = configureStore();
 
 const App = () => {
-    const [state, setState] = useState(store.getState());
+    const state = useSelector((state) => state);
 
     useEffect(() => {
         store.dispatch(getTasks());
-        store.subscribe(() => setState(store.getState()));
     }, []);
 
     const changeTitle = (taskId) => {
