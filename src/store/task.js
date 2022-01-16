@@ -35,7 +35,7 @@ const { update, remove, recived } = actions;
 const taskRequested = createAction('task/requested');
 const taskRequestFailed = createAction('task/requestFailed');
 
-export const getTasks = () => async (getState, dispatch) => {
+export const getTasks = () => async (dispatch, getState) => {
     dispatch(taskRequested());
     try {
         const data = await todosService.fetch();
@@ -45,7 +45,7 @@ export const getTasks = () => async (getState, dispatch) => {
     }
 };
 
-export const completeTask = (id) => (getState, dispatch) => {
+export const completeTask = (id) => (dispatch, getState) => {
     dispatch(update({ id, completed: true }));
 };
 
