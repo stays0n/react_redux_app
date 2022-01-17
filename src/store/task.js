@@ -13,7 +13,7 @@ const taskSlice = createSlice({
     initialState,
     reducers: {
         recived(state, action) {
-            state.entities = action.payload;
+            state.entities = [...action.payload, ...state.entities];
             state.isLoading = false;
         },
         update(state, action) {
@@ -55,6 +55,22 @@ export const loadTasks = () => async (dispatch, getState) => {
 
 export const completeTask = (id) => (dispatch, getState) => {
     dispatch(update({ id, completed: true }));
+};
+export const createTask = () => async (dispatch, getState) => {
+    dispatch(taskRequested());
+    const payload = {
+        userId: Math.trunc(Math.random() * 1000),
+        title: 'new task',
+        completed: false,
+    };
+    try {
+        const data = await todosService.create(payload);
+        // console.log(data);
+        dispatch(recived([data]));
+    } catch (error) {
+        dispatch(taskRequestFailed());
+        dispatch(setError(error.message));
+    }
 };
 
 export function titleChanged(id) {

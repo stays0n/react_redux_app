@@ -8,6 +8,7 @@ import {
     loadTasks,
     getTasks,
     getTasksLoadingStatus,
+    createTask,
 } from './store/task';
 import { getError } from './store/errors';
 import configureStore from './store/store';
@@ -44,6 +45,7 @@ const App = () => {
     return (
         <React.Fragment>
             <h1>App</h1>
+            <button onClick={() => dispatch(createTask())}>Create</button>
 
             <ul>
                 {state.map((el) => (
