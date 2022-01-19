@@ -27,6 +27,16 @@ const App = () => {
         dispatch(loadTasks());
     }, [dispatch]);
 
+    const addNewTask = () => {
+        dispatch(
+            createTask({
+                userId: 1,
+                title: 'Some new task',
+                completed: false,
+            }),
+        );
+    };
+
     const changeTitle = (taskId) => {
         dispatch(titleChanged(taskId));
     };
@@ -45,8 +55,7 @@ const App = () => {
     return (
         <React.Fragment>
             <h1>App</h1>
-            <button onClick={() => dispatch(createTask())}>Create</button>
-
+            <button onClick={addNewTask}>Add task</button>
             <ul>
                 {state.map((el) => (
                     <li key={el.id}>
